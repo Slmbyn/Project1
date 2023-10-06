@@ -7,7 +7,9 @@ Snake, the timeless arcade game, is back! In snake, players control a snake with
 ## Tech Stack:
 
 Javascript
+
 HTML
+
 CSS
 
 ## Wireframe:
