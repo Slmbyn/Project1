@@ -1,5 +1,9 @@
   /*----- constants -----*/
-let snake = [];
+let snake = [
+    {x: 300, y: 100, height: 40, width: 40, color: 'black'},
+    {x: 300, y: 60, height: 40, width: 40, color: 'black'},
+    {x: 300, y: 40, height: 40, width: 40, color: 'black'},
+];
 
 /* ----- CANVAS SETUP ------- */ 
 const ctx = canvas.getContext('2d')
@@ -13,7 +17,6 @@ canvas.setAttribute('width', getComputedStyle(canvas).width);
 // ctx.fillRect(600, 600, 40, 40); //bottom right corner
 // ctx.fillRect(0, 600, 40, 40); //bottom left corner
 // ctx.fillRect(600, 0, 40, 40); //top right corner
-
 // ctx.strokeStyle = 'black';
 // ctx.strokeRect(300, 300, 40, 40); //middle
 
@@ -22,7 +25,7 @@ canvas.setAttribute('width', getComputedStyle(canvas).width);
 
 /* ----- CLASSES ------ */
 
-class Subject {
+class Food {
     constructor(x,y,width,height,color) {
         this.x = x;
         this.y = y;
@@ -40,11 +43,19 @@ class Subject {
 
 /* ----- BOARD OBJECTS ------ */
 
-const mySnake = new Subject(300,20,40,40,'black');
-mySnake.render();
+// const mySnake = new Subject(300,100,40,40,'black');
+// mySnake.render();
 
-const food = new Subject(450,300,40,40,'orange')
-food.render();
+function drawSnake (snakeArray, ctx){
+snakeArray.forEach(segment => {
+    ctx.fillStyle = segment.color;
+    ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
+});
+}
+drawSnake(snake, ctx);
+
+const snakeFood = new Food(450,300,40,40,'orange')
+snakeFood.render();
 
   /*----- state variables -----*/
 
