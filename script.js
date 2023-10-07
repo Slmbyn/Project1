@@ -7,18 +7,44 @@ console.log(ctx);
 canvas.setAttribute('height', getComputedStyle(canvas).height);
 canvas.setAttribute('width', getComputedStyle(canvas).width);
 
-ctx.fillStyle = 'purple';
-ctx.fillRect(0, 0, 40, 40); //top left corner
-ctx.fillStyle = 'orange';
-ctx.fillRect(600, 600, 40, 40); //bottom right corner
-ctx.fillRect(0, 600, 40, 40); //bottom left corner
-ctx.fillRect(600, 0, 40, 40); //top right corner
+// ctx.fillStyle = 'purple';
+// ctx.fillRect(0, 0, 40, 40); //top left corner
+// ctx.fillStyle = 'orange';
+// ctx.fillRect(600, 600, 40, 40); //bottom right corner
+// ctx.fillRect(0, 600, 40, 40); //bottom left corner
+// ctx.fillRect(600, 0, 40, 40); //top right corner
 
-ctx.strokeStyle = 'black';
-ctx.strokeRect(300, 300, 40, 40); //middle
+// ctx.strokeStyle = 'black';
+// ctx.strokeRect(300, 300, 40, 40); //middle
 
 /* ----- DOM SELECTORS ------ */
 
+
+/* ----- CLASSES ------ */
+
+class Subject {
+    constructor(x,y,width,height,color) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.color = color;
+        this.alive = true;
+    }
+    render() {
+        ctx.fillStyle = this.color;
+        ctx.strokeStyle = this.border;
+        ctx.fillRect(this.x, this.y, this.width, this.height, this.color);
+    }
+}
+
+/* ----- BOARD OBJECTS ------ */
+
+const mySnake = new Subject(300,20,40,40,'black');
+mySnake.render();
+
+const food = new Subject(450,300,40,40,'orange')
+food.render();
 
   /*----- state variables -----*/
 
