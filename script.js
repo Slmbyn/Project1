@@ -5,6 +5,11 @@ let snake = [
     {x: 300, y: 40, height: 40, width: 40, color: 'black'},
 ];
 
+/* ----- DOM SELECTORS ------ */
+const canvas = document.querySelector("canvas");
+
+
+
 /* ----- CANVAS SETUP ------- */ 
 const ctx = canvas.getContext('2d')
 console.log(ctx);
@@ -19,9 +24,6 @@ canvas.setAttribute('width', getComputedStyle(canvas).width);
 // ctx.fillRect(600, 0, 40, 40); //top right corner
 // ctx.strokeStyle = 'black';
 // ctx.strokeRect(300, 300, 40, 40); //middle
-
-/* ----- DOM SELECTORS ------ */
-
 
 /* ----- CLASSES ------ */
 
@@ -46,13 +48,7 @@ class Food {
 // const mySnake = new Subject(300,100,40,40,'black');
 // mySnake.render();
 
-function drawSnake (snakeArray, ctx){
-snakeArray.forEach(segment => {
-    ctx.fillStyle = segment.color;
-    ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
-});
-}
-drawSnake(snake, ctx);
+
 
 const snakeFood = new Food(450,300,40,40,'orange')
 snakeFood.render();
@@ -64,10 +60,18 @@ snakeFood.render();
 
 
   /*----- event listeners -----*/
-
+canvas.addEventListener('click', e => {
+    console.log(`x: ${e.offsetX}, y:${e.offsetY}`)
+})
 
   /*----- functions -----*/
-
+function drawSnake (snakeArray, ctx){
+snakeArray.forEach(segment => {
+    ctx.fillStyle = segment.color;
+    ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
+});
+}
+drawSnake(snake, ctx);
 
 
 
