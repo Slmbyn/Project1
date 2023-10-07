@@ -6,7 +6,7 @@ let snake = [
 ];
 
 /* ----- DOM SELECTORS ------ */
-const canvas = document.querySelector("canvas");
+const canvas = document.querySelector('canvas');
 
 
 
@@ -60,18 +60,32 @@ snakeFood.render();
 
 
   /*----- event listeners -----*/
-canvas.addEventListener('click', e => {
-    console.log(`x: ${e.offsetX}, y:${e.offsetY}`)
-})
+// canvas.addEventListener('click', e => {      //making sure it works. this one gives click coordinates
+//     console.log(`x: ${e.offsetX}, y:${e.offsetY}`)
+// })
+
+document.addEventListener('keydown', moveSnake);
+
 
   /*----- functions -----*/
 function drawSnake (snakeArray, ctx){
-snakeArray.forEach(segment => {
+    snakeArray.forEach(segment => {
     ctx.fillStyle = segment.color;
     ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
 });
 }
 drawSnake(snake, ctx);
+
+function moveSnake (e){
+    console.log(e)
+}
+
+// function redrawBoard () {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas
+//     drawSnake(); // Call the drawSnake function to draw the snake
+//     snakeFood.render();
+// }
+// redrawBoard();
 
 
 
