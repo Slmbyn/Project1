@@ -4,16 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="score">Score:</div>
-    <div class="highscore">High Score:</div>
-    <div class="gameContainer">
-        <canvas id="canvas"></canvas>
-    </div>
+    <div class="mainWrapper">
+            <div class="title">SNAKE</div>
+            <div class="description">Play the classic Snake game! Guide your snake to eat food and grow longer, but be careful not to collide with the walls or yourself. Challenge your reflexes and strategy in this timeless arcade game!</div>
+        <div class="scoresWrapper">
+            <div class="score">Score:</div>
+            <div class="highscore">High Score:</div>
+        </div>
 
-    <button>New Game</button>
+        <div class="gameContainer">
+            <canvas id="canvas"></canvas>
+        </div>
+          <button>New Game</button>
+    </div>
+  
     <script src="script.js"></script>
 </body>
 </html>

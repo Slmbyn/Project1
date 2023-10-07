@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(49, 46, 46);
+    height: 100vh;
+}
+
+.mainWrapper {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: .5fr 2fr 1fr;
+    margin: 10px;
+    padding: 40px;
+}
+
+.gameContainer {
+    margin: 10px;
+    height: 50vh;
+    width: 50vw;
+    border: 3px solid white;
+    background-color: grey;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    
+}
+
+canvas {
+    background-color: rgb(24, 146, 24);
+    width: 100%;
+    height: 100%;
+}
+
+.scoresWrapper {
+    display: flex;  /*makes score & high score next to eachother */
+    /* background-color: blue; */
+    justify-content: space-between;
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    align-items: end;
+    color: white;
+    font-size: 150%;
+}
+.score {
+    padding-left: 20px;
+}
+.highscore {
+    padding-right: 60px;
+}
+
+button {
+    width: 110px;
+    height: 50px;
+    border-radius: 10%;
+    font-size: 20px;
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    justify-self: center;
+}
+
+.title, .description {
+    color: white;
+    font-family: 'Press Start 2P', monospace;
+}
+
+.title {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    align-self: end;
+    justify-self: center;
+    font-size: 450%;
+}
+.description {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    align-self: center;
+    justify-self: center;
+    font-size: 150%;
+}
