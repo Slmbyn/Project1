@@ -12,6 +12,8 @@ HTML
 
 CSS
 
+Canvas
+
 ## Wireframe:
 
 ![project1wireframe](https://github.com/Slmbyn/Project1/assets/62676738/b796b326-29ea-415e-badd-82e7ecee7210)

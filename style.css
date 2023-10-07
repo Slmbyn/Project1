@@ -19,8 +19,8 @@ body {
 
 .gameContainer {
     margin: 10px;
-    height: 50vh;
-    width: 50vw;
+    height: 40em;
+    width: 40em;
     border: 3px solid white;
     background-color: grey;
     grid-column: 2 / 3;
