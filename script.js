@@ -55,7 +55,7 @@ class Food {
 
 
 
-const snakeFood = new Food(450,300,40,40,'orange')
+const snakeFood = new Food(400,300,40,40,'orange')
 snakeFood.render();
 
   /*----- state variables -----*/
@@ -95,7 +95,7 @@ function drawSnake (snake, ctx){
     //if (moveSnake === 'd') {snake.pop(snakeTail)}
 });
 }
-drawSnake(snake, ctx);
+//drawSnake(snake, ctx);
 
 //const keyPressed = {};
 // function moveSnake (e) {
@@ -112,43 +112,43 @@ drawSnake(snake, ctx);
 function moveSnake (e){
     //console.log(e)
     const speed = 40;
-    const snakeHead = snake[0];
+    let snakeHeadx = snake[0].x;
+    let snakeHeady = snake[0].y;
     const snakeTail = snake[snake.length];
     switch(e.key) {
         case 'w':
-            snakeHead.y -= speed;
+            let newHeadup = {x: snakeHeadx, y: snakeHeady -= speed, height: 40, width: 40, color: 'red'};
+            snake.unshift(newHeadup);
+            snake.pop(snakeTail);
+            console.log(snake);
+            //snakeHead.y -= speed;
             drawSnake(snake, ctx);
             //console.log('move snake up');
             break;
         case 's':
-            snakeHead.y += speed;
+            let newHeaddown = {x: snakeHeadx, y: snakeHeady += speed, height: 40, width: 40, color: 'red'};
+            snake.unshift(newHeaddown);
+            snake.pop(snakeTail);
+            console.log(snake);
+            //snakeHead.y += speed;
             drawSnake(snake, ctx);
             //console.log('move snake down');
             break;
         case 'd':
-            
-            const newHead = {x: snake[0].x += speed, y: snake[0].y, height: 40, width: 40, color: 'red'};
-            snake.unshift(newHead);
+            let newHeadright = {x: snakeHeadx += speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
+            snake.unshift(newHeadright);
             snake.pop(snakeTail);
             console.log(snake);
             //snakeHead.x += speed;
             drawSnake(snake, ctx);
-            // snake.forEach(segment => {
-            //     segment.x += speed;
-            // });
-            
-            // if (e.key==='d' && direction === 'down'){
-            //     snake[0].x += speed;
-            //     snake[1].y += speed;
-            //     snake[2].y += speed;}
-            // if (e.key==='d' && direction === 'right'){
-            //     return;
-            // }
-            
             //console.log('move snake right');
             break;
         case 'a':
-            snakeHead.x -= speed;
+            let newHeadleft = {x: snakeHeadx -= speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
+            snake.unshift(newHeadleft);
+            snake.pop(snakeTail);
+            console.log(snake);
+            //snakeHead.x -= speed;
             drawSnake(snake, ctx);
             //console.log('move snake left');
             break;
