@@ -75,7 +75,7 @@ document.addEventListener('keydown', moveSnake);
 
   /*----- functions -----*/
 
-const interval = setInterval(gameloop, 100);
+const interval = setInterval(gameloop, 50);
 function gameloop () {
     //clear canvas to re-render
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -117,39 +117,55 @@ function moveSnake (e){
     const snakeTail = snake[snake.length];
     switch(e.key) {
         case 'w':
+            if (direction === 'down'){
+                return;
+            } else { 
             let newHeadup = {x: snakeHeadx, y: snakeHeady -= speed, height: 40, width: 40, color: 'red'};
             snake.unshift(newHeadup);
             snake.pop(snakeTail);
+            direction = 'up';
             console.log(snake);
             //snakeHead.y -= speed;
-            drawSnake(snake, ctx);
+            drawSnake(snake, ctx);}
             //console.log('move snake up');
             break;
         case 's':
+            if (direction === 'up'){
+                return;
+            } else { 
             let newHeaddown = {x: snakeHeadx, y: snakeHeady += speed, height: 40, width: 40, color: 'red'};
             snake.unshift(newHeaddown);
             snake.pop(snakeTail);
+            direction = 'down';
             console.log(snake);
             //snakeHead.y += speed;
-            drawSnake(snake, ctx);
+            drawSnake(snake, ctx);}
             //console.log('move snake down');
             break;
         case 'd':
+            if (direction === 'left'){
+                return;
+            } else {
             let newHeadright = {x: snakeHeadx += speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
             snake.unshift(newHeadright);
             snake.pop(snakeTail);
+            direction ='right';
             console.log(snake);
             //snakeHead.x += speed;
-            drawSnake(snake, ctx);
+            drawSnake(snake, ctx);}
             //console.log('move snake right');
             break;
         case 'a':
+            if (direction === 'right'){
+                return;
+            } else { 
             let newHeadleft = {x: snakeHeadx -= speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
             snake.unshift(newHeadleft);
             snake.pop(snakeTail);
+            direction = 'left';
             console.log(snake);
             //snakeHead.x -= speed;
-            drawSnake(snake, ctx);
+            drawSnake(snake, ctx);}
             //console.log('move snake left');
             break;
         default: console.log(`${e.key} not recognized`)
