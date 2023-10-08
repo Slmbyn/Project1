@@ -83,8 +83,12 @@ function gameloop () {
     drawSnake(snake, ctx);
     snakeFood.render();
     //do game logic
+    collisionDetect(snakeHead, snakeBody, snakeFood, wall);
     
 }
+let snakeHead = snake[0];
+let snakeBody = [];                         //  <--- Not sure what to set this as
+let wall = {x:canvas.width, y:canvas.height} //  <--- Not sure what to set this as
 
 
 function drawSnake (snake, ctx){
@@ -96,17 +100,6 @@ function drawSnake (snake, ctx){
 });
 }
 //drawSnake(snake, ctx);
-
-//const keyPressed = {};
-// function moveSnake (e) {
-//     const speed = 20;
-//     if (e.key === 'd'){
-//         snake[0].x + speed;
-//         snake[1].y + speed;
-//         snake[2].y + speed;
-//     }
-// }
-
 
 
 function moveSnake (e){
@@ -124,8 +117,7 @@ function moveSnake (e){
             snake.unshift(newHeadup);
             snake.pop(snakeTail);
             direction = 'up';
-            console.log(snake);
-            //snakeHead.y -= speed;
+            //console.log(snake);
             drawSnake(snake, ctx);}
             //console.log('move snake up');
             break;
@@ -137,8 +129,7 @@ function moveSnake (e){
             snake.unshift(newHeaddown);
             snake.pop(snakeTail);
             direction = 'down';
-            console.log(snake);
-            //snakeHead.y += speed;
+            //console.log(snake);
             drawSnake(snake, ctx);}
             //console.log('move snake down');
             break;
@@ -150,8 +141,7 @@ function moveSnake (e){
             snake.unshift(newHeadright);
             snake.pop(snakeTail);
             direction ='right';
-            console.log(snake);
-            //snakeHead.x += speed;
+            //console.log(snake);
             drawSnake(snake, ctx);}
             //console.log('move snake right');
             break;
@@ -163,8 +153,7 @@ function moveSnake (e){
             snake.unshift(newHeadleft);
             snake.pop(snakeTail);
             direction = 'left';
-            console.log(snake);
-            //snakeHead.x -= speed;
+            //console.log(snake);
             drawSnake(snake, ctx);}
             //console.log('move snake left');
             break;
@@ -172,15 +161,21 @@ function moveSnake (e){
     }
 }
 
+function collisionDetect (snakeHead, snakeBody, snakeFood, wall) {
+    //detect when snake(x,y) = food(x,y)
+    const foodTop = snakeHead.y + snakeHead.height >= snakeFood.y;
+        console.log(foodTop)
+    const foodBottom = snakeHead.y <= snakeFood.y + snakeFood.height;
+    const foodLeft = snakeHead.x + snakeHead.width >= snakeFood.x;
+    const foodRight = snakeHead.x <= snakeFood.x + snakeFood.width;
+        //if that happens, redraw the food somewhere random on the canvas & add to the snake
+    //detect if the wall is hit
+        // if it is, end the game (disable all movement and show game over message)
+    //detect if snake hits itself
+        // it it does, end the game (disable all movement and show game over message)
+}
 
 
-// function redrawBoard () {
-//     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas
-//     drawSnake(snake, ctx); // Call the drawSnake function to draw the snake
-//     snakeFood.render();
-//     render();
-// }
-//redrawBoard();
 
 
 
@@ -189,25 +184,13 @@ function moveSnake (e){
 
 
 
-// Variables
-// DOM Selectors
 
-// Canvas Setup
-//     const ctx = canvas.getContext("2d");
-//     console.log(ctx);
-//     // set the canvas's resolution to be the same as the windows (weird but okay)
-//     // set the canvas to be the render size it appears on the page
-//     // (how you make a responsive canves) 48:50min
-//     canvas.setAttribute("height", getComputedStyle(canvas).height);
-//     canvas.setAttribute("width", getComputedStyle(canvas).width);
-// Classes
-// // create game objects (snake & food) (just make them colored boxes using ctx.fill)
-// // console.log to make sure they show up 
-// Functions
-// // movement handler
-// //detect hit                <--- goal is to get to this point today
-// // game interval/game loop
-//     // clear the canvas, render the snake, render the food (get that working then, generate food randomly, then increase snake length), add "if collision, game over message and disable event listeners"
+
+
+
+
+
+
 
 
 
