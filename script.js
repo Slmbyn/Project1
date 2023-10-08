@@ -1,9 +1,11 @@
   /*----- constants -----*/
 let snake = [
-    {x: 300, y: 100, height: 40, width: 40, color: 'black'},
-    {x: 300, y: 60, height: 40, width: 40, color: 'black'},
-    {x: 300, y: 40, height: 40, width: 40, color: 'black'},
+    {x: 300, y: 100, height: 40, width: 40, color: 'red'},
+    {x: 300, y: 60, height: 40, width: 40, color: 'blue'},
+    {x: 300, y: 20, height: 40, width: 40, color: 'white'},
 ];
+
+let direction = 'down';
 
 /* ----- DOM SELECTORS ------ */
 const canvas = document.querySelector('canvas');
@@ -64,6 +66,9 @@ snakeFood.render();
 //     console.log(`x: ${e.offsetX}, y:${e.offsetY}`)
 // })
 
+
+// canvas.setAttribute('tabindex', 0);
+// canvas.focus();
 document.addEventListener('keydown', moveSnake);
 
 
@@ -76,9 +81,57 @@ function drawSnake (snakeArray, ctx){
 }
 drawSnake(snake, ctx);
 
+//const keyPressed = {};
+// function moveSnake (e) {
+//     const speed = 20;
+//     if (e.key === 'd'){
+//         snake[0].x + speed;
+//         snake[1].y + speed;
+//         snake[2].y + speed;
+//     }
+// }
+
+
 function moveSnake (e){
-    console.log(e)
+    //console.log(e)
+    const speed = 40;
+    const snakeHead = snake[0];
+    switch(e.key) {
+        case 'w':
+            snakeHead.y -= speed;
+            drawSnake(snake, ctx);
+            //console.log('move snake up');
+            break;
+        case 's':
+            snakeHead.y += speed;
+            drawSnake(snake, ctx);
+            //console.log('move snake down');
+            break;
+        case 'd':
+            // snake.forEach(segment => {
+            //     segment.x += speed;
+            // });
+            snakeHead.x += speed;
+            // if (e.key==='d' && direction === 'down'){
+            //     snake[0].x += speed;
+            //     snake[1].y += speed;
+            //     snake[2].y += speed;}
+            // if (e.key==='d' && direction === 'right'){
+            //     return;
+            // }
+            drawSnake(snake, ctx);
+            //console.log('move snake right');
+            break;
+        case 'a':
+            snakeHead.x -= speed;
+            drawSnake(snake, ctx);
+            //console.log('move snake left');
+            break;
+        default: console.log(`${e.key} not recognized`)
+    }
 }
+
+
 
 // function redrawBoard () {
 //     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas
