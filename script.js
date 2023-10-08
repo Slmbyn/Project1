@@ -7,8 +7,11 @@ let snake = [
 
 let direction = 'down';
 
+
 /* ----- DOM SELECTORS ------ */
 const canvas = document.querySelector('canvas');
+const message = document.querySelector('.gameover')
+const button = document.querySelector('button')
 
 
 
@@ -66,17 +69,30 @@ snakeFood.render();
 //     console.log(`x: ${e.offsetX}, y:${e.offsetY}`)
 // })
 
-
-// canvas.setAttribute('tabindex', 0);
-// canvas.focus();
 document.addEventListener('keydown', moveSnake);
+//button.addEventListener('click', redrawBoard);
 
 
   /*----- functions -----*/
-function drawSnake (snakeArray, ctx){
-    snakeArray.forEach(segment => {
+
+const interval = setInterval(gameloop, 100);
+function gameloop () {
+    //clear canvas to re-render
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // render all game objects
+    drawSnake(snake, ctx);
+    snakeFood.render();
+    //do game logic
+    
+}
+
+
+function drawSnake (snake, ctx){
+    snake.forEach(segment => {
     ctx.fillStyle = segment.color;
     ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
+    // if (snake moves && didnt eat food) then snake.pop(snakeTail);
+    //if (moveSnake === 'd') {snake.pop(snakeTail)}
 });
 }
 drawSnake(snake, ctx);
@@ -92,10 +108,12 @@ drawSnake(snake, ctx);
 // }
 
 
+
 function moveSnake (e){
     //console.log(e)
     const speed = 40;
     const snakeHead = snake[0];
+    const snakeTail = snake[snake.length];
     switch(e.key) {
         case 'w':
             snakeHead.y -= speed;
@@ -108,10 +126,17 @@ function moveSnake (e){
             //console.log('move snake down');
             break;
         case 'd':
+            
+            const newHead = {x: snake[0].x += speed, y: snake[0].y, height: 40, width: 40, color: 'red'};
+            snake.unshift(newHead);
+            snake.pop(snakeTail);
+            console.log(snake);
+            //snakeHead.x += speed;
+            drawSnake(snake, ctx);
             // snake.forEach(segment => {
             //     segment.x += speed;
             // });
-            snakeHead.x += speed;
+            
             // if (e.key==='d' && direction === 'down'){
             //     snake[0].x += speed;
             //     snake[1].y += speed;
@@ -119,7 +144,7 @@ function moveSnake (e){
             // if (e.key==='d' && direction === 'right'){
             //     return;
             // }
-            drawSnake(snake, ctx);
+            
             //console.log('move snake right');
             break;
         case 'a':
@@ -135,10 +160,11 @@ function moveSnake (e){
 
 // function redrawBoard () {
 //     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas
-//     drawSnake(); // Call the drawSnake function to draw the snake
+//     drawSnake(snake, ctx); // Call the drawSnake function to draw the snake
 //     snakeFood.render();
+//     render();
 // }
-// redrawBoard();
+//redrawBoard();
 
 
 
