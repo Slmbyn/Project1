@@ -189,14 +189,29 @@ function collisionDetect (snakeHeadx,snakeHeady , snakeBody, snakeFood, wall) {
         //console.log('wall hit');
         // if it is, end the game (disable all movement and show game over message)
         document.removeEventListener('keydown', moveSnake);
-        message.innerText = 'GAME OVER'
+        message.innerText = 'GAME OVER!!';
     }
     //detect if snake hits itself. If it does, end the game (disable all movement and show game over message)
-        // if (snakeHeady = ___ || snakeHeadx = ___ ||snakeHeadx + snakeHeadWidth = ___ ||snakeHeady + snakeHeadHeight = ___) {
+        // if (snakeHeady === snake.y + snake.height || snakeHeadx === snake.x + snake.width||snakeHeadx + snakeHeadWidth === snake.x ||snakeHeady + snakeHeadHeight === snake.y) {
         // document.removeEventListener('keydown', moveSnake);
-        // message.innerText = 'GAME OVER'
+        // message.innerText = 'GAME OVER';
         // }
-        // 
+        // Detect if snake hits itself. If it does, end the game (disable all movement and show game over message)
+// Detect if snake hits itself. If it does, end the game (disable all movement and show game over message)
+for (let i = 1; i < snake.length; i++) {
+    const segment = snake[i];
+    if (
+      snakeHeadx === segment.x &&
+      snakeHeady === segment.y
+    ) {
+      document.removeEventListener('keydown', moveSnake);
+      message.innerText = 'GAME OVER!!';
+      return; // Exit the function once a collision is detected
+    }
+  }
+  
+  
+        
 }
 
 
