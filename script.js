@@ -73,9 +73,9 @@ document.addEventListener('keydown', moveSnake);
 //button.addEventListener('click', redrawBoard);
 
 
-  /*----- functions -----*/
+  /*----------------------------------- functions --------------------------------------*/
 
-const interval = setInterval(gameloop, 50);
+const interval = setInterval(gameloop, 100);
 function gameloop () {
     //clear canvas to re-render
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -83,10 +83,9 @@ function gameloop () {
     drawSnake(snake, ctx);
     snakeFood.render();
     //do game logic
-    collisionDetect(snakeHead, snakeBody, snakeFood, wall);
-    
+    collisionDetect(snake[0].x ,snake[0].y , snakeBody, snakeFood, wall);
 }
-let snakeHead = snake[0];
+//let snakeHead = snake[0];
 let snakeBody = [];                         //  <--- Not sure what to set this as
 let wall = {x:canvas.width, y:canvas.height} //  <--- Not sure what to set this as
 
@@ -109,7 +108,7 @@ function moveSnake (e){
     let snakeHeady = snake[0].y;
     const snakeTail = snake[snake.length];
     switch(e.key) {
-        case 'w':
+        case 'ArrowUp':
             if (direction === 'down'){
                 return;
             } else { 
@@ -121,7 +120,7 @@ function moveSnake (e){
             drawSnake(snake, ctx);}
             //console.log('move snake up');
             break;
-        case 's':
+        case 'ArrowDown':
             if (direction === 'up'){
                 return;
             } else { 
@@ -133,7 +132,7 @@ function moveSnake (e){
             drawSnake(snake, ctx);}
             //console.log('move snake down');
             break;
-        case 'd':
+        case 'ArrowRight':
             if (direction === 'left'){
                 return;
             } else {
@@ -145,7 +144,7 @@ function moveSnake (e){
             drawSnake(snake, ctx);}
             //console.log('move snake right');
             break;
-        case 'a':
+        case 'ArrowLeft':
             if (direction === 'right'){
                 return;
             } else { 
@@ -161,19 +160,90 @@ function moveSnake (e){
     }
 }
 
-function collisionDetect (snakeHead, snakeBody, snakeFood, wall) {
+// function collisionDetect (snakeHead, snakeBody, snakeFood, wall) {
+//     //detect when snake(x,y) = food(x,y)
+//     const foodTop = snakeHead.y + snakeHead.height >= snakeFood.y;
+//         // console.log(`foodTop is ${foodTop}`);
+//     const foodBottom = snakeHead.y <= snakeFood.y + snakeFood.height;
+//         // console.log(`foodBottom is ${foodBottom}`);
+//     const foodLeft = snakeHead.x + snakeHead.width >= snakeFood.x;
+//         // console.log(`foodLeft is ${foodLeft}`);
+//     const foodRight = snakeHead.x <= snakeFood.x + snakeFood.width;
+//         console.log(`foodTop is ${foodTop}, foodBottom is ${foodBottom}, foodLeft is ${foodLeft}, foodRight is ${foodLeft}`);
+
+
+    //     if that happens, redraw the food somewhere random on the canvas & add to the snake
+    // detect if the wall is hit
+    //     if it is, end the game (disable all movement and show game over message)
+    // detect if snake hits itself
+    //     it it does, end the game (disable all movement and show game over message)
+// }
+
+function collisionDetect (newSnakeHeadx,newSnakeHeady , snakeBody, snakeFood, wall) {
+    newSnakeHeadx = snake[0].x;
+    newSnakeHeady = snake[0].y;
+    let snakeHeadHeight = snake[0].height;
+    let snakeHeadWidth = snake[0].width;
     //detect when snake(x,y) = food(x,y)
-    const foodTop = snakeHead.y + snakeHead.height >= snakeFood.y;
-        console.log(foodTop)
-    const foodBottom = snakeHead.y <= snakeFood.y + snakeFood.height;
-    const foodLeft = snakeHead.x + snakeHead.width >= snakeFood.x;
-    const foodRight = snakeHead.x <= snakeFood.x + snakeFood.width;
+    const foodTop = newSnakeHeady + snakeHeadHeight > snakeFood.y;
+    const foodBottom = newSnakeHeady < snakeFood.y + snakeFood.height;
+    const foodLeft = newSnakeHeadx + snakeHeadWidth > snakeFood.x;
+    const foodRight = newSnakeHeadx < snakeFood.x + snakeFood.width;
+        //console.log(`foodTop is ${foodTop}, foodBottom is ${foodBottom}, foodLeft is ${foodLeft}, foodRight is ${foodLeft}`);
+if (foodBottom && foodLeft && foodRight && foodTop) {
+    //console.log('hit detected');
+    return true;
+}
+
         //if that happens, redraw the food somewhere random on the canvas & add to the snake
     //detect if the wall is hit
         // if it is, end the game (disable all movement and show game over message)
     //detect if snake hits itself
         // it it does, end the game (disable all movement and show game over message)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
