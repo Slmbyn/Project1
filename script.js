@@ -94,8 +94,7 @@ function drawSnake (snake, ctx){
     snake.forEach(segment => {
     ctx.fillStyle = segment.color;
     ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
-    // if (snake moves && didnt eat food) then snake.pop(snakeTail);
-    //if (moveSnake === 'd') {snake.pop(snakeTail)}
+    // if (collis) then snake.pop(snakeTail);
 });
 }
 //drawSnake(snake, ctx);
@@ -160,48 +159,42 @@ function moveSnake (e){
     }
 }
 
-// function collisionDetect (snakeHead, snakeBody, snakeFood, wall) {
-//     //detect when snake(x,y) = food(x,y)
-//     const foodTop = snakeHead.y + snakeHead.height >= snakeFood.y;
-//         // console.log(`foodTop is ${foodTop}`);
-//     const foodBottom = snakeHead.y <= snakeFood.y + snakeFood.height;
-//         // console.log(`foodBottom is ${foodBottom}`);
-//     const foodLeft = snakeHead.x + snakeHead.width >= snakeFood.x;
-//         // console.log(`foodLeft is ${foodLeft}`);
-//     const foodRight = snakeHead.x <= snakeFood.x + snakeFood.width;
-//         console.log(`foodTop is ${foodTop}, foodBottom is ${foodBottom}, foodLeft is ${foodLeft}, foodRight is ${foodLeft}`);
 
-
-    //     if that happens, redraw the food somewhere random on the canvas & add to the snake
-    // detect if the wall is hit
-    //     if it is, end the game (disable all movement and show game over message)
-    // detect if snake hits itself
-    //     it it does, end the game (disable all movement and show game over message)
-// }
-
-function collisionDetect (newSnakeHeadx,newSnakeHeady , snakeBody, snakeFood, wall) {
-    newSnakeHeadx = snake[0].x;
-    newSnakeHeady = snake[0].y;
+function collisionDetect (snakeHeadx,snakeHeady , snakeBody, snakeFood, wall) {
+    snakeHeadx = snake[0].x;
+    snakeHeady = snake[0].y;
     let snakeHeadHeight = snake[0].height;
     let snakeHeadWidth = snake[0].width;
     //detect when snake(x,y) = food(x,y)
-    const foodTop = newSnakeHeady + snakeHeadHeight > snakeFood.y;
-    const foodBottom = newSnakeHeady < snakeFood.y + snakeFood.height;
-    const foodLeft = newSnakeHeadx + snakeHeadWidth > snakeFood.x;
-    const foodRight = newSnakeHeadx < snakeFood.x + snakeFood.width;
+    const foodTop = snakeHeady + snakeHeadHeight > snakeFood.y;
+    const foodBottom = snakeHeady < snakeFood.y + snakeFood.height;
+    const foodLeft = snakeHeadx + snakeHeadWidth > snakeFood.x;
+    const foodRight = snakeHeadx < snakeFood.x + snakeFood.width;
         //console.log(`foodTop is ${foodTop}, foodBottom is ${foodBottom}, foodLeft is ${foodLeft}, foodRight is ${foodLeft}`);
 if (foodBottom && foodLeft && foodRight && foodTop) {
     //console.log('hit detected');
+    //if that happens, redraw the food somewhere random on the canvas
+    snakeFood.x= Math.floor(Math.random() * (canvas.width - snakeFood.width));
+    snakeFood.y = Math.floor(Math.random() * (canvas.width - snakeFood.height));
+    snakeFood.render();
+    //add to the snake
+    const lastSegment = snake[snake.length - 1]
+    const newSegment = {x:lastSegment.x, y: lastSegment.y, height: 40, width: 40, color:'red'}
+    snake.push(newSegment);
+    drawSnake(snake, ctx);
     return true;
 }
-
-        //if that happens, redraw the food somewhere random on the canvas & add to the snake
     //detect if the wall is hit
+    if (snakeHeady <= 0 || snakeHeadx <= 0 ||snakeHeadx + snakeHeadWidth >= canvas.width ||snakeHeady + snakeHeadHeight >= canvas.height) {
+        console.log('wall hit');
+    }
+    
+
+   
         // if it is, end the game (disable all movement and show game over message)
     //detect if snake hits itself
         // it it does, end the game (disable all movement and show game over message)
 }
-
 
 
 
