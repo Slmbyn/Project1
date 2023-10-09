@@ -171,29 +171,32 @@ function collisionDetect (snakeHeadx,snakeHeady , snakeBody, snakeFood, wall) {
     const foodLeft = snakeHeadx + snakeHeadWidth > snakeFood.x;
     const foodRight = snakeHeadx < snakeFood.x + snakeFood.width;
         //console.log(`foodTop is ${foodTop}, foodBottom is ${foodBottom}, foodLeft is ${foodLeft}, foodRight is ${foodLeft}`);
-if (foodBottom && foodLeft && foodRight && foodTop) {
-    //console.log('hit detected');
-    //if that happens, redraw the food somewhere random on the canvas
-    snakeFood.x= Math.floor(Math.random() * (canvas.width - snakeFood.width));
-    snakeFood.y = Math.floor(Math.random() * (canvas.width - snakeFood.height));
-    snakeFood.render();
-    //add to the snake
-    const lastSegment = snake[snake.length - 1]
-    const newSegment = {x:lastSegment.x, y: lastSegment.y, height: 40, width: 40, color:'red'}
-    snake.push(newSegment);
-    drawSnake(snake, ctx);
-    return true;
-}
+    if (foodBottom && foodLeft && foodRight && foodTop) {
+        //console.log('hit detected');
+        //if that happens, redraw the food somewhere random on the canvas
+        snakeFood.x= Math.floor(Math.random() * (canvas.width - snakeFood.width));
+        snakeFood.y = Math.floor(Math.random() * (canvas.width - snakeFood.height));
+        snakeFood.render();
+        //add to the snake
+        const lastSegment = snake[snake.length - 1]
+        const newSegment = {x:lastSegment.x, y: lastSegment.y, height: 40, width: 40, color:'red'}
+        snake.push(newSegment);
+        drawSnake(snake, ctx);
+        return true;
+    }
     //detect if the wall is hit
     if (snakeHeady <= 0 || snakeHeadx <= 0 ||snakeHeadx + snakeHeadWidth >= canvas.width ||snakeHeady + snakeHeadHeight >= canvas.height) {
-        console.log('wall hit');
-    }
-    
-
-   
+        //console.log('wall hit');
         // if it is, end the game (disable all movement and show game over message)
-    //detect if snake hits itself
-        // it it does, end the game (disable all movement and show game over message)
+        document.removeEventListener('keydown', moveSnake);
+        message.innerText = 'GAME OVER'
+    }
+    //detect if snake hits itself. If it does, end the game (disable all movement and show game over message)
+        // if (snakeHeady = ___ || snakeHeadx = ___ ||snakeHeadx + snakeHeadWidth = ___ ||snakeHeady + snakeHeadHeight = ___) {
+        // document.removeEventListener('keydown', moveSnake);
+        // message.innerText = 'GAME OVER'
+        // }
+        // 
 }
 
 
