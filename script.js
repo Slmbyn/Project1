@@ -5,7 +5,7 @@ let snake = [
     {x: 300, y: 20, height: 40, width: 40, color: 'white'},
 ];
 
-let direction = 'down';
+let direction = null;
 
 
 /* ----- DOM SELECTORS ------ */
@@ -75,7 +75,7 @@ document.addEventListener('keydown', moveSnake);
 
   /*----------------------------------- functions --------------------------------------*/
 
-const interval = setInterval(gameloop, 100);
+const interval = setInterval(gameloop, 50);
 function gameloop () {
     //clear canvas to re-render
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -83,18 +83,14 @@ function gameloop () {
     drawSnake(snake, ctx);
     snakeFood.render();
     //do game logic
-    collisionDetect(snake[0].x ,snake[0].y , snakeBody, snakeFood, wall);
+    collisionDetect(snake[0].x ,snake[0].y, snakeFood);
 }
-//let snakeHead = snake[0];
-let snakeBody = [];                         //  <--- Not sure what to set this as
-let wall = {x:canvas.width, y:canvas.height} //  <--- Not sure what to set this as
 
 
 function drawSnake (snake, ctx){
     snake.forEach(segment => {
     ctx.fillStyle = segment.color;
     ctx.fillRect(segment.x, segment.y, segment.width, segment.height);
-    // if (collis) then snake.pop(snakeTail);
 });
 }
 //drawSnake(snake, ctx);
@@ -102,65 +98,202 @@ function drawSnake (snake, ctx){
 
 function moveSnake (e){
     //console.log(e)
-    const speed = 40;
-    let snakeHeadx = snake[0].x;
-    let snakeHeady = snake[0].y;
-    const snakeTail = snake[snake.length];
+    // const speed = 40;
+    // let snakeHeadx = snake[0].x;
+    // let snakeHeady = snake[0].y;
+    // const snakeTail = snake[snake.length];
     switch(e.key) {
         case 'ArrowUp':
             if (direction === 'down'){
                 return;
             } else { 
-            let newHeadup = {x: snakeHeadx, y: snakeHeady -= speed, height: 40, width: 40, color: 'red'};
-            snake.unshift(newHeadup);
-            snake.pop(snakeTail);
-            direction = 'up';
-            //console.log(snake);
-            drawSnake(snake, ctx);}
-            //console.log('move snake up');
+                    direction = 'up';
+            }
             break;
         case 'ArrowDown':
             if (direction === 'up'){
                 return;
             } else { 
-            let newHeaddown = {x: snakeHeadx, y: snakeHeady += speed, height: 40, width: 40, color: 'red'};
-            snake.unshift(newHeaddown);
-            snake.pop(snakeTail);
-            direction = 'down';
-            //console.log(snake);
-            drawSnake(snake, ctx);}
-            //console.log('move snake down');
+                    direction = 'down';
+            }
             break;
         case 'ArrowRight':
             if (direction === 'left'){
                 return;
             } else {
-            let newHeadright = {x: snakeHeadx += speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
-            snake.unshift(newHeadright);
-            snake.pop(snakeTail);
-            direction ='right';
-            //console.log(snake);
-            drawSnake(snake, ctx);}
-            //console.log('move snake right');
+                    direction ='right';
+            }
             break;
         case 'ArrowLeft':
             if (direction === 'right'){
                 return;
             } else { 
-            let newHeadleft = {x: snakeHeadx -= speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
-            snake.unshift(newHeadleft);
-            snake.pop(snakeTail);
-            direction = 'left';
-            //console.log(snake);
-            drawSnake(snake, ctx);}
-            //console.log('move snake left');
+                    direction = 'left';
+            }
             break;
         default: console.log(`${e.key} not recognized`)
     }
 }
 
 
-function collisionDetect (snakeHeadx,snakeHeady , snakeBody, snakeFood, wall) {
+setInterval(autoMoveSnake, 100)
+
+function autoMoveSnake(){
+    const speed = 40;
+    let snakeHeadx = snake[0].x;
+    let snakeHeady = snake[0].y;
+    const snakeTail = snake[snake.length];
+    if (direction === 'null') {
+        return;
+    // } else if (collisionDetect == true){
+    //     return;
+    } else if (direction === 'up'){
+        let newHeadup = {x: snakeHeadx, y: snakeHeady -= speed, height: 40, width: 40, color: 'red'};
+        snake.unshift(newHeadup);
+        snake.pop(snakeTail);
+        drawSnake(snake, ctx);
+    } else if (direction === 'down'){
+        let newHeaddown = {x: snakeHeadx, y: snakeHeady += speed, height: 40, width: 40, color: 'red'};
+        snake.unshift(newHeaddown);
+        snake.pop(snakeTail);
+        drawSnake(snake, ctx);
+    } else if (direction === 'right'){
+        let newHeadright = {x: snakeHeadx += speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
+        snake.unshift(newHeadright);
+        snake.pop(snakeTail);
+        drawSnake(snake, ctx);
+    } else if (direction === 'left') {
+        let newHeadleft = {x: snakeHeadx -= speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
+        snake.unshift(newHeadleft);
+        snake.pop(snakeTail);
+        drawSnake(snake, ctx);
+    }
+}
+// function moveSnake (e){
+//     //console.log(e)
+//     const speed = 40;
+//     let snakeHeadx = snake[0].x;
+//     let snakeHeady = snake[0].y;
+//     const snakeTail = snake[snake.length];
+//     switch(e.key) {
+//         case 'ArrowUp':
+//             if (direction === 'down'){
+//                 return;
+//             } else { 
+                
+//                     let newHeadup = {x: snakeHeadx, y: snakeHeady -= speed, height: 40, width: 40, color: 'red'};
+//                     snake.unshift(newHeadup);
+//                     snake.pop(snakeTail);
+//                     direction = 'up';
+//                     drawSnake(snake, ctx);
+                
+//             }
+//             break;
+//         case 'ArrowDown':
+//             if (direction === 'up'){
+//                 return;
+//             } else { 
+//                     let newHeaddown = {x: snakeHeadx, y: snakeHeady += speed, height: 40, width: 40, color: 'red'};
+//                     snake.unshift(newHeaddown);
+//                     snake.pop(snakeTail);
+//                     direction = 'down';
+//                     drawSnake(snake, ctx);
+//             }
+//             break;
+//         case 'ArrowRight':
+//             if (direction === 'left'){
+//                 return;
+//             } else {
+                
+//                     let newHeadright = {x: snakeHeadx += speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
+//                     snake.unshift(newHeadright);
+//                     snake.pop(snakeTail);
+//                     direction ='right';
+//                     drawSnake(snake, ctx);
+                
+//             }
+//             break;
+//         case 'ArrowLeft':
+//             if (direction === 'right'){
+//                 return;
+//             } else { 
+                
+//                     let newHeadleft = {x: snakeHeadx -= speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
+//                     snake.unshift(newHeadleft);
+//                     snake.pop(snakeTail);
+//                     direction = 'left';
+//                     drawSnake(snake, ctx);
+                
+//             }
+//             break;
+//         default: console.log(`${e.key} not recognized`)
+//     }
+// }
+
+// function moveSnake (e){
+//     //console.log(e)
+//     const speed = 40;
+//     let snakeHeadx = snake[0].x;
+//     let snakeHeady = snake[0].y;
+//     const snakeTail = snake[snake.length];
+//     switch(e.key) {
+//         case 'ArrowUp':
+//             if (direction === 'down'){
+//                 return;
+//             } else { 
+//                 const continueUp = setInterval(() => {
+//                     let newHeadup = {x: snakeHeadx, y: snakeHeady -= speed, height: 40, width: 40, color: 'red'};
+//                     snake.unshift(newHeadup);
+//                     snake.pop(snakeTail);
+//                     direction = 'up';
+//                     drawSnake(snake, ctx);
+//                 }, 500);
+//             }
+//             break;
+//         case 'ArrowDown':
+//             if (direction === 'up'){
+//                 return;
+//             } else { 
+//                 const continueDown = setInterval(() => {
+//                     let newHeaddown = {x: snakeHeadx, y: snakeHeady += speed, height: 40, width: 40, color: 'red'};
+//                     snake.unshift(newHeaddown);
+//                     snake.pop(snakeTail);
+//                     direction = 'down';
+//                     drawSnake(snake, ctx);
+//                 }, 500);
+//             }
+//             break;
+//         case 'ArrowRight':
+//             if (direction === 'left'){
+//                 return;
+//             } else {
+//                 const continueRight = setInterval(() => {
+//                     let newHeadright = {x: snakeHeadx += speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
+//                     snake.unshift(newHeadright);
+//                     snake.pop(snakeTail);
+//                     direction ='right';
+//                     drawSnake(snake, ctx);
+//                 }, 500)
+//             }
+//             break;
+//         case 'ArrowLeft':
+//             if (direction === 'right'){
+//                 return;
+//             } else { 
+//                 const continueDown = setInterval(() => {
+//                     let newHeadleft = {x: snakeHeadx -= speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
+//                     snake.unshift(newHeadleft);
+//                     snake.pop(snakeTail);
+//                     direction = 'left';
+//                     drawSnake(snake, ctx);
+//                 }, 500);
+//             }
+//             break;
+//         default: console.log(`${e.key} not recognized`)
+//     }
+// }
+
+function collisionDetect (snakeHeadx,snakeHeady, snakeFood) {
     snakeHeadx = snake[0].x;
     snakeHeady = snake[0].y;
     let snakeHeadHeight = snake[0].height;
@@ -191,27 +324,18 @@ function collisionDetect (snakeHeadx,snakeHeady , snakeBody, snakeFood, wall) {
         document.removeEventListener('keydown', moveSnake);
         message.innerText = 'GAME OVER!!';
     }
-    //detect if snake hits itself. If it does, end the game (disable all movement and show game over message)
-        // if (snakeHeady === snake.y + snake.height || snakeHeadx === snake.x + snake.width||snakeHeadx + snakeHeadWidth === snake.x ||snakeHeady + snakeHeadHeight === snake.y) {
-        // document.removeEventListener('keydown', moveSnake);
-        // message.innerText = 'GAME OVER';
-        // }
-        // Detect if snake hits itself. If it does, end the game (disable all movement and show game over message)
-// Detect if snake hits itself. If it does, end the game (disable all movement and show game over message)
-for (let i = 1; i < snake.length; i++) {
-    const segment = snake[i];
-    if (
-      snakeHeadx === segment.x &&
-      snakeHeady === segment.y
-    ) {
-      document.removeEventListener('keydown', moveSnake);
-      message.innerText = 'GAME OVER!!';
-      return; // Exit the function once a collision is detected
+    // Detect if snake hits itself. If it does, end the game (disable all movement and show game over message)
+    for (let i = 1; i < snake.length; i++) {
+        const segment = snake[i];
+        if (
+        snakeHeadx === segment.x &&
+        snakeHeady === segment.y
+        ) {
+        document.removeEventListener('keydown', moveSnake);
+        message.innerText = 'GAME OVER!!';
+        return; // Exit the function once a collision is detected
+        }
     }
-  }
-  
-  
-        
 }
 
 
