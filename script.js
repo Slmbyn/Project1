@@ -105,8 +105,8 @@ function reset() {
     // Reset the direction
     direction = null;
     // Reset the score
-    let points = 0;
-    score.innerHTML = `Score: ${points}`;
+    points = 0;
+    score.innerHTML = `Score: 0`;
     // Randomly re-generate food
     snakeFood.x = Math.floor(Math.random() * (canvas.width - snakeFood.width));
     snakeFood.y = Math.floor(Math.random() * (canvas.height - snakeFood.height));
@@ -372,7 +372,15 @@ function collisionDetect (snakeHeadx,snakeHeady, snakeFood) {
         //add to the score
         points++;
         score.innerHTML = `Score: ${points}`;
+        // check for high score
+        if (points > highPoints){
+            highPoints = points;
+            highScore.innerHTML= `High Score: ${highPoints}`;
+        } else if (points < highPoints) {
+            highScore.innerHTML= `High Score: ${highPoints}`;
+        }
         return true;
+
     }
     //detect if the wall is hit
     if (snakeHeady <= 0 || snakeHeadx <= 0 ||snakeHeadx + snakeHeadWidth >= canvas.width ||snakeHeady + snakeHeadHeight >= canvas.height) {
@@ -397,7 +405,7 @@ function collisionDetect (snakeHeadx,snakeHeady, snakeFood) {
 
 
 
-
+// {highScore.innerHTML= `High Score: ${highPoints}`;}
 
 
 
