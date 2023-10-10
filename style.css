@@ -32,6 +32,8 @@ canvas {
     background-color: rgb(24, 146, 24);
     width: 100%;
     height: 100%;
+    /* justify-self: center;
+    align-self: center; */
 }
 
 .scoresWrapper {
@@ -62,15 +64,7 @@ canvas {
     color: rgb(223, 34, 34);
 }
 
-button {
-    width: 110px;
-    height: 50px;
-    border-radius: 10%;
-    font-size: 20px;
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
-    justify-self: center;
-}
+
 
 .title, .description {
     color: white;
@@ -90,4 +84,21 @@ button {
     align-self: center;
     justify-self: center;
     font-size: 150%;
+}
+button {
+    width: 110px;
+    height: 50px;
+    border-radius: 10%;
+    font-size: 20px;
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    justify-self: center;
+}
+
+button:hover {
+    color: white;
+    background-color: rgb(188, 185, 185);
+    transform: scale(1.1);
+    transition: transform 150ms ease-in;
+    cursor: pointer;
 }
