@@ -27,27 +27,53 @@ canvas.setAttribute('width', getComputedStyle(canvas).width);
 
 /* ----- CLASSES ------ */
 
-class Food {
-    constructor(x,y,width,height,color) {
+// class Food {
+//     constructor(x,y,width,height,color) {
+//         this.x = x;
+//         this.y = y;
+//         this.width = width;
+//         this.height = height;
+//         this.color = color;
+//         this.alive = true;
+//         this.className = 'food'
+//     }
+//     render() {
+//         ctx.fillStyle = this.color;
+//         ctx.strokeStyle = this.border;
+//         ctx.fillRect(this.x, this.y, this.width, this.height, this.color);
+//     }
+// }
+class Mouse {
+    constructor(x,y,width,height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.color = color;
         this.alive = true;
-        this.className = 'food'
+        this.img = new Image()
+        this.img.src = '—Pngtree—mouse running away vector material_5756793.png'
+        // this.img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ0YaszmpYHwqvOFYRMnfaZKEhlgCLm5P46g&usqp=CAU'
     }
-    render() {
-        ctx.fillStyle = this.color;
-        ctx.strokeStyle = this.border;
-        ctx.fillRect(this.x, this.y, this.width, this.height, this.color);
+    on_image_loaded(f) {
+        this.img.onload = f;
+    }
+    render(){
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 }
 
+
+
 /* ----- BOARD OBJECTS ------ */
 
-const snakeFood = new Food(400,300,40,40,'orange')
-snakeFood.render();
+const jerry = new Mouse (100,300,100,100)
+jerry.on_image_loaded(function() {
+    jerry.render()
+});
+
+
+// const snakeFood = new Food(400,300,40,40,'orange')
+// snakeFood.render();
 
 
   /*----- event listeners -----*/
@@ -68,8 +94,8 @@ function reset() {
     direction = null;
     points = 0;
     score.innerHTML = `Score: 0`;
-    snakeFood.x = Math.floor(Math.random() * (canvas.width - snakeFood.width));
-    snakeFood.y = Math.floor(Math.random() * (canvas.height - snakeFood.height));
+    jerry.x = Math.floor(Math.random() * (canvas.width - jerry.width));
+    jerry.y = Math.floor(Math.random() * (canvas.height - jerry.height));
     message.innerText = '';
     autoMoveInterval = setInterval(autoMoveSnake, 100);
     document.addEventListener('keydown', moveSnake);
@@ -79,8 +105,9 @@ function reset() {
 function gameloop () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawSnake(snake, ctx);
-    snakeFood.render();
-    collisionDetect(snake[0].x ,snake[0].y, snakeFood);
+    // jerry.render();
+    jerry.render();
+    collisionDetect(snake[0].x ,snake[0].y, jerry);
 }
 
 
@@ -160,23 +187,23 @@ function autoMoveSnake(){
 }
 
 
-function collisionDetect (snakeHeadx,snakeHeady, snakeFood) {
+function collisionDetect (snakeHeadx,snakeHeady, jerry) {
     snakeHeadx = snake[0].x;
     snakeHeady = snake[0].y;
     let snakeHeadHeight = snake[0].height;
     let snakeHeadWidth = snake[0].width;
     //detect when snake(x,y) = food(x,y)
-    const foodTop = snakeHeady + snakeHeadHeight > snakeFood.y;
-    const foodBottom = snakeHeady < snakeFood.y + snakeFood.height;
-    const foodLeft = snakeHeadx + snakeHeadWidth > snakeFood.x;
-    const foodRight = snakeHeadx < snakeFood.x + snakeFood.width;
+    const foodTop = snakeHeady + snakeHeadHeight > jerry.y;
+    const foodBottom = snakeHeady < jerry.y + jerry.height;
+    const foodLeft = snakeHeadx + snakeHeadWidth > jerry.x;
+    const foodRight = snakeHeadx < jerry.x + jerry.width;
         //console.log(`foodTop is ${foodTop}, foodBottom is ${foodBottom}, foodLeft is ${foodLeft}, foodRight is ${foodLeft}`);
     if (foodBottom && foodLeft && foodRight && foodTop) {
         //console.log('hit detected');
         //if that happens, redraw the food somewhere random on the canvas
-        snakeFood.x= Math.floor(Math.random() * (canvas.width - snakeFood.width));
-        snakeFood.y = Math.floor(Math.random() * (canvas.width - snakeFood.height));
-        snakeFood.render();
+        jerry.x= Math.floor(Math.random() * (canvas.width - jerry.width));
+        jerry.y = Math.floor(Math.random() * (canvas.width - jerry.height));
+        jerry.render();
         //add to the snake
         const lastSegment = snake[snake.length - 1]
         const newSegment = {x:lastSegment.x, y: lastSegment.y, height: 40, width: 40, color:'red'}
