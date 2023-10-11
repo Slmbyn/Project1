@@ -70,13 +70,14 @@ canvas {
     justify-self: center;
     align-self: center;
     font-family: 'Press Start 2P', monospace;
-    font-size: 500%;
+    font-size: 4rem;
     margin-bottom: 30px;
     color: rgb(223, 34, 34);
 }
 .imagewrapper {
-    justify-content: space-between;
-    /* border-bottom: .1em solid green; */
+    /* justify-content: space-between; */
+    border-bottom: .1em solid green;
+    /* align-self: end; */
 }
 
 .snakeimg {
