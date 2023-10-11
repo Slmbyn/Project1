@@ -12,7 +12,7 @@ body {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: .5fr 2fr 1fr;
+    grid-template-rows: .5fr 1fr 1fr;
     margin: 10px;
     padding: 40px;
     justify-items: center;
@@ -70,7 +70,7 @@ canvas {
     justify-self: center;
     align-self: center;
     font-family: 'Press Start 2P', monospace;
-    font-size: 350%;
+    font-size: 500%;
     margin-bottom: 30px;
     color: rgb(223, 34, 34);
 }
