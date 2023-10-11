@@ -45,6 +45,7 @@ class Food {
         this.height = height;
         this.color = color;
         this.alive = true;
+        this.className = 'food'
     }
     render() {
         ctx.fillStyle = this.color;
@@ -158,7 +159,7 @@ function moveSnake (e){
     // const snakeTail = snake[snake.length];
     switch(e.key) {
         case 'ArrowUp':
-            if (direction === 'down'){
+            if (direction === 'down' || direction === null){
                 return;
             } else { 
                     direction = 'up';

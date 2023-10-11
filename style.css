@@ -34,6 +34,9 @@ p {
     margin-bottom: 2rem;
 }
 
+.food {
+    background-color: pink;
+}
 
 canvas {
     background-color: rgb(24, 146, 24);
