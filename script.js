@@ -1,8 +1,8 @@
   /*----- constants -----*/
 let snake = [
     {x: 300, y: 100, height: 40, width: 40, color: 'red'},
-    {x: 300, y: 60, height: 40, width: 40, color: 'blue'},
-    {x: 300, y: 20, height: 40, width: 40, color: 'white'},
+    {x: 300, y: 60, height: 40, width: 40, color: 'red'},
+    {x: 300, y: 20, height: 40, width: 40, color: 'red'},
 ];
 
 let direction = null;
@@ -99,8 +99,8 @@ function reset() {
     // Reset the snake to its initial state
     snake = [
         { x: 300, y: 100, height: 40, width: 40, color: 'red' },
-        { x: 300, y: 60, height: 40, width: 40, color: 'blue' },
-        { x: 300, y: 20, height: 40, width: 40, color: 'white' },
+        { x: 300, y: 60, height: 40, width: 40, color: 'red' },
+        { x: 300, y: 20, height: 40, width: 40, color: 'red' },
     ];
     // Reset the direction
     direction = null;
