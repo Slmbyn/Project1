@@ -120,29 +120,29 @@ function drawSnake (snake, ctx){
 
 
 function moveSnake (e){
-    switch(e.key) {
-        case 'ArrowUp':
+    switch(e.key.toLowerCase()) {
+        case 'w':
             if (direction === 'down' || direction === null){
                 return;
             } else { 
                     direction = 'up';
             }
             break;
-        case 'ArrowDown':
+        case 's':
             if (direction === 'up'){
                 return;
             } else { 
                     direction = 'down';
             }
             break;
-        case 'ArrowRight':
+        case 'd':
             if (direction === 'left'){
                 return;
             } else {
                     direction ='right';
             }
             break;
-        case 'ArrowLeft':
+        case 'a':
             if (direction === 'right'){
                 return;
             } else { 
