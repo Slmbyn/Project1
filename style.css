@@ -74,11 +74,6 @@ canvas {
     margin-bottom: 30px;
     color: rgb(223, 34, 34);
 }
-.imagewrapper {
-    /* justify-content: space-between; */
-    border-bottom: .1em solid green;
-    /* align-self: end; */
-}
 
 .snakeimg {
     height: 35%;
@@ -90,6 +85,15 @@ canvas {
     height: 20%;
     width: 20%;
     padding-left: 10%;
+    /* padding-top: 0%; */
+}
+
+.grassimg {
+    height: 20%;
+    width: 20%;
+    padding: 0;
+    margin: 0% -13px;
+    /* background-repeat: repeat-x; */
 }
 
 
