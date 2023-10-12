@@ -7,7 +7,7 @@ let snake = [
 
 let direction = null;
 let autoMoveInterval = setInterval(autoMoveSnake, 100);
-const gameInterval = setInterval(gameloop, 50);
+let gameInterval = setInterval(gameloop, 50);
 let points = 0;
 let highPoints = 0;
 
@@ -98,6 +98,7 @@ function reset() {
     jerry.y = Math.floor(Math.random() * (canvas.height - jerry.height));
     message.innerText = '';
     autoMoveInterval = setInterval(autoMoveSnake, 100);
+    gameInterval = setInterval(gameloop, 50);
     document.addEventListener('keydown', moveSnake);
 }
 
@@ -202,7 +203,7 @@ function collisionDetect (snakeHeadx,snakeHeady, jerry) {
         //console.log('hit detected');
         //if that happens, redraw the food somewhere random on the canvas
         jerry.x= Math.floor(Math.random() * (canvas.width - jerry.width));
-        jerry.y = Math.floor(Math.random() * (canvas.width - jerry.height));
+        jerry.y = Math.floor(Math.random() * (canvas.height - jerry.height));
         jerry.render();
         //add to the snake
         const lastSegment = snake[snake.length - 1]
