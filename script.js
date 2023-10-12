@@ -1,8 +1,8 @@
   /*----- constants -----*/
 let snake = [
-    {x: 300, y: 100, height: 40, width: 40, color: 'red'},
-    {x: 300, y: 60, height: 40, width: 40, color: 'red'},
-    {x: 300, y: 20, height: 40, width: 40, color: 'red'},
+    {x: 300, y: 100, height: 20, width: 20, color: 'red'},
+    {x: 300, y: 70, height: 20, width: 20, color: 'red'},
+    {x: 300, y: 40, height: 20, width: 20, color: 'red'},
 ];
 
 let direction = null;
@@ -72,7 +72,7 @@ jerry.on_image_loaded(function() {
 });
 
 
-// const snakeFood = new Food(400,300,40,40,'orange')
+// const snakeFood = new Food(200,300,20,20,'orange')
 // snakeFood.render();
 
 
@@ -87,9 +87,9 @@ button.addEventListener('click', reset);
 function reset() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     snake = [
-        { x: 300, y: 100, height: 40, width: 40, color: 'red' },
-        { x: 300, y: 60, height: 40, width: 40, color: 'red' },
-        { x: 300, y: 20, height: 40, width: 40, color: 'red' },
+        {x: 300, y: 100, height: 20, width: 20, color: 'red'},
+        {x: 300, y: 70, height: 20, width: 20, color: 'red'},
+        {x: 300, y: 40, height: 20, width: 20, color: 'red'},
     ];
     direction = null;
     points = 0;
@@ -158,29 +158,29 @@ function moveSnake (e){
 
 
 function autoMoveSnake(){
-    const speed = 40;
+    const speed = 30;
     let snakeHeadx = snake[0].x;
     let snakeHeady = snake[0].y;
     const snakeTail = snake[snake.length];
             if (direction === 'null') {
                 return;
             } else if (direction === 'up'){
-                let newHeadup = {x: snakeHeadx, y: snakeHeady -= speed, height: 40, width: 40, color: 'red'};
+                let newHeadup = {x: snakeHeadx, y: snakeHeady -= speed, height: 20, width: 20, color: 'red'};
                 snake.unshift(newHeadup);
                 snake.pop(snakeTail);
                 drawSnake(snake, ctx);
             } else if (direction === 'down'){
-                let newHeaddown = {x: snakeHeadx, y: snakeHeady += speed, height: 40, width: 40, color: 'red'};
+                let newHeaddown = {x: snakeHeadx, y: snakeHeady += speed, height: 20, width: 20, color: 'red'};
                 snake.unshift(newHeaddown);
                 snake.pop(snakeTail);
                 drawSnake(snake, ctx);
             } else if (direction === 'right'){
-                let newHeadright = {x: snakeHeadx += speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
+                let newHeadright = {x: snakeHeadx += speed, y: snakeHeady, height: 20, width: 20, color: 'red'};
                 snake.unshift(newHeadright);
                 snake.pop(snakeTail);
                 drawSnake(snake, ctx);
             } else if (direction === 'left') {
-                let newHeadleft = {x: snakeHeadx -= speed, y: snakeHeady, height: 40, width: 40, color: 'red'};
+                let newHeadleft = {x: snakeHeadx -= speed, y: snakeHeady, height: 20, width: 20, color: 'red'};
                 snake.unshift(newHeadleft);
                 snake.pop(snakeTail);
                 drawSnake(snake, ctx);
@@ -207,7 +207,7 @@ function collisionDetect (snakeHeadx,snakeHeady, jerry) {
         jerry.render();
         //add to the snake
         const lastSegment = snake[snake.length - 1]
-        const newSegment = {x:lastSegment.x, y: lastSegment.y, height: 40, width: 40, color:'red'}
+        const newSegment = {x:lastSegment.x, y: lastSegment.y, height: 20, width: 20, color:'red'}
         snake.push(newSegment);
         drawSnake(snake, ctx);
         //add to the score
