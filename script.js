@@ -6,7 +6,7 @@ let snake = [
 ];
 
 let direction = null;
-let autoMoveInterval = setInterval(autoMoveSnake, 200);
+let autoMoveInterval = setInterval(autoMoveSnake, 100);
 const gameInterval = setInterval(gameloop, 50);
 let points = 0;
 let highPoints = 0;
@@ -97,7 +97,7 @@ function reset() {
     jerry.x = Math.floor(Math.random() * (canvas.width - jerry.width));
     jerry.y = Math.floor(Math.random() * (canvas.height - jerry.height));
     message.innerText = '';
-    autoMoveInterval = setInterval(autoMoveSnake, 200);
+    autoMoveInterval = setInterval(autoMoveSnake, 100);
     document.addEventListener('keydown', moveSnake);
 }
 
