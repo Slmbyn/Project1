@@ -42,13 +42,10 @@ canvas {
     background-color: rgb(76, 113, 149);
     width: 100%;
     height: 100%;
-    /* justify-self: center;
-    align-self: center; */
 }
 
 .scoresWrapper {
-    display: flex;  /*makes score & high score next to eachother */
-    /* background-color: blue; */
+    display: flex;
     justify-content: space-between;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
@@ -60,9 +57,7 @@ canvas {
 .score {
     padding-left: 20px;
 }
-/* .highscore {
-    padding-right: 60px;
-} */
+
 
 .gameover {
     grid-column: 2 / 3;

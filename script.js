@@ -1,4 +1,4 @@
-  /*----- constants -----*/
+  /*----- variables -----*/
 let snake = [
     {x: 300, y: 100, height: 20, width: 20, color: 'red'},
     {x: 300, y: 70, height: 20, width: 20, color: 'red'},
@@ -27,22 +27,6 @@ canvas.setAttribute('width', getComputedStyle(canvas).width);
 
 /* ----- CLASSES ------ */
 
-// class Food {
-//     constructor(x,y,width,height,color) {
-//         this.x = x;
-//         this.y = y;
-//         this.width = width;
-//         this.height = height;
-//         this.color = color;
-//         this.alive = true;
-//         this.className = 'food'
-//     }
-//     render() {
-//         ctx.fillStyle = this.color;
-//         ctx.strokeStyle = this.border;
-//         ctx.fillRect(this.x, this.y, this.width, this.height, this.color);
-//     }
-// }
 class Mouse {
     constructor(x,y,width,height) {
         this.x = x;
@@ -52,7 +36,6 @@ class Mouse {
         this.alive = true;
         this.img = new Image()
         this.img.src = '—Pngtree—mouse running away vector material_5756793.png'
-        // this.img.src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ0YaszmpYHwqvOFYRMnfaZKEhlgCLm5P46g&usqp=CAU'
     }
     on_image_loaded(f) {
         this.img.onload = f;
@@ -70,11 +53,6 @@ const jerry = new Mouse (100,300,100,100)
 jerry.on_image_loaded(function() {
     jerry.render()
 });
-
-
-// const snakeFood = new Food(200,300,20,20,'orange')
-// snakeFood.render();
-
 
   /*----- event listeners -----*/
 document.addEventListener('keydown', moveSnake);
@@ -106,7 +84,6 @@ function reset() {
 function gameloop () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawSnake(snake, ctx);
-    // jerry.render();
     jerry.render();
     collisionDetect(snake[0].x ,snake[0].y, jerry);
 }
@@ -155,8 +132,6 @@ function moveSnake (e){
 }
 
 
-
-
 function autoMoveSnake(){
     const speed = 30;
     let snakeHeadx = snake[0].x;
@@ -193,27 +168,20 @@ function collisionDetect (snakeHeadx,snakeHeady, jerry) {
     snakeHeady = snake[0].y;
     let snakeHeadHeight = snake[0].height;
     let snakeHeadWidth = snake[0].width;
-    //detect when snake(x,y) = food(x,y)
     const foodTop = snakeHeady + snakeHeadHeight > jerry.y;
     const foodBottom = snakeHeady < jerry.y + jerry.height;
     const foodLeft = snakeHeadx + snakeHeadWidth > jerry.x;
     const foodRight = snakeHeadx < jerry.x + jerry.width;
-        //console.log(`foodTop is ${foodTop}, foodBottom is ${foodBottom}, foodLeft is ${foodLeft}, foodRight is ${foodLeft}`);
     if (foodBottom && foodLeft && foodRight && foodTop) {
-        //console.log('hit detected');
-        //if that happens, redraw the food somewhere random on the canvas
         jerry.x= Math.floor(Math.random() * (canvas.width - jerry.width));
         jerry.y = Math.floor(Math.random() * (canvas.height - jerry.height));
         jerry.render();
-        //add to the snake
         const lastSegment = snake[snake.length - 1]
         const newSegment = {x:lastSegment.x, y: lastSegment.y, height: 20, width: 20, color:'red'}
         snake.push(newSegment);
         drawSnake(snake, ctx);
-        //add to the score
         points++;
         score.innerHTML = `Score: ${points}`;
-        // check for high score
         if (points > highPoints){
             highPoints = points;
             highScore.innerHTML= `High Score: ${highPoints}`;
@@ -221,24 +189,19 @@ function collisionDetect (snakeHeadx,snakeHeady, jerry) {
             highScore.innerHTML= `High Score: ${highPoints}`;
         }
         return true;
-
     }
-    //detect if the wall is hit
     if (snakeHeady <= 0 || snakeHeadx <= 0 ||snakeHeadx + snakeHeadWidth >= canvas.width ||snakeHeady + snakeHeadHeight >= canvas.height) {
-        //console.log('wall hit');
-        // if it is, end the game (disable all movement and show game over message)
         document.removeEventListener('keydown', moveSnake);
         message.innerText = 'GAME OVER!!';
         clearInterval(autoMoveInterval);
     }
-    // Detect if snake hits itself. If it does, end the game (disable all movement and show game over message)
     for (let i = 1; i < snake.length; i++) {
         const segment = snake[i];
         if (snakeHeadx === segment.x && snakeHeady === segment.y) {
         document.removeEventListener('keydown', moveSnake);
         message.innerText = 'GAME OVER!!';
         clearInterval(autoMoveInterval);
-        return; // Exit the function once a collision is detected
+        return;
         }
     }
     return false;
