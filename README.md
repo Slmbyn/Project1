@@ -3,6 +3,12 @@
 
 Snake, the timeless arcade game, is back! In snake, players control a snake with never ending hunger as it navigates through a field in search of food! The more food the snake eats, the longer and longer it grows. Just be sure to not collide with yourself or the walls or the snake’s a goner. Compete for high scores and have fun in this adventure!
 
+## How to Play:
+
+Use your WASD keys to navigate the board chasing after the quick mouse! If you run into the wall or yourself you'll have to restart and chase that high score all over again!
+
+[Play the Game Now!](https://slmbyn.github.io/Project1-Snake/)
+
 
 ## Tech Stack:
 
@@ -17,6 +23,8 @@ Canvas
 ## Wireframe:
 
 ![project1wireframe](https://github.com/Slmbyn/Project1/assets/62676738/b796b326-29ea-415e-badd-82e7ecee7210)
+
+![SnakeGame](SnakeGame.png)
 
 
 ## MVP Goals:
@@ -42,9 +50,7 @@ Provide option to restart game at any point
 
 Have snake increase in speed as it eats
 
-Add bad food that makes the snake shrink instead of grow
-
-Have the type (image) of food randomly change
+Create an image in place of the food
 
 
 ## Potential Roadblocks
