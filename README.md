@@ -1,3 +1,5 @@
+![SnakeBanner](snake-banner.png)
+
 # SNAKE
 
 
@@ -7,7 +9,7 @@ Snake, the timeless arcade game, is back! In snake, players control a snake with
 
 Use your WASD keys to navigate the board chasing after the quick mouse! If you run into the wall or yourself you'll have to restart and chase that high score all over again!
 
-[Play the Game Now!](https://slmbyn.github.io/Project1-Snake/)
+<!-- [Play the Game Now!](https://slmbyn.github.io/Project1-Snake/) -->
 
 
 ## Tech Stack:

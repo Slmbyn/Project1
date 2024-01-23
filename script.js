@@ -50,6 +50,7 @@ class Mouse {
 /* ----- BOARD OBJECTS ------ */
 
 const jerry = new Mouse (100,300,100,100)
+
 jerry.on_image_loaded(function() {
     jerry.render()
 });
@@ -63,6 +64,7 @@ button.addEventListener('click', reset);
 
 
 function reset() {
+    // clearInterval(autoMoveInterval);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     snake = [
         {x: 300, y: 100, height: 20, width: 20, color: 'red'},
@@ -78,6 +80,7 @@ function reset() {
     autoMoveInterval = setInterval(autoMoveSnake, 100);
     gameInterval = setInterval(gameloop, 50);
     document.addEventListener('keydown', moveSnake);
+    console.log('reset interval')
 }
 
 
@@ -194,6 +197,7 @@ function collisionDetect (snakeHeadx,snakeHeady, jerry) {
         document.removeEventListener('keydown', moveSnake);
         message.innerText = 'GAME OVER!!';
         clearInterval(autoMoveInterval);
+        console.log('removed')
     }
     for (let i = 1; i < snake.length; i++) {
         const segment = snake[i];
@@ -201,6 +205,7 @@ function collisionDetect (snakeHeadx,snakeHeady, jerry) {
         document.removeEventListener('keydown', moveSnake);
         message.innerText = 'GAME OVER!!';
         clearInterval(autoMoveInterval);
+        console.log('removed-body')
         return;
         }
     }
